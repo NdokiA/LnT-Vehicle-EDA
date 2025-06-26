@@ -184,7 +184,6 @@ def id_bar():
     plt.ylabel('Number of Loans')
     plt.xticks(rotation=0)
     plt.tight_layout()
-    plt.grid(axis='x')
     st.pyplot(fig)
 
 id_loaner['ID_Count'] = id_loaner[['ID_Availability', 'Tax_ID_Availability',
@@ -222,26 +221,28 @@ def id_count_bar():
     plt.xlabel('Number of IDs Provided')
     plt.ylabel('Number of Loans')
     plt.legend()
-    plt.grid(axis='x')
     plt.tight_layout()
     st.pyplot(fig)
 
 def categorize_credit_score(n):
-    match n:
-        case n if n <= 3:
+    try:
+        n = float(n)
+        if n <= 3:
             return "Very-Low\nRisk"
-        case n if 3 < n <= 6:
-            return "Low Risk"  
-        case n if 6 < n <= 8:
+        elif 3 < n <= 6:
+            return "Low Risk"
+        elif 6 < n <= 8:
             return "Medium Risk"
-        case n if 8 < n <= 10:
+        elif 8 < n <= 10:
             return "High Risk"
-        case n if 10< n <= 12:
+        elif 10 < n <= 12:
             return "Very-High\nRisk"
-        case 13:
+        elif n == 13:
             return "No Bureau\nHistory"
-        case _:
+        else:
             return "Unscored"
+    except:
+        return "Unscored"
         
 def creditscore_bar():
   
