@@ -184,7 +184,7 @@ def id_bar():
     plt.ylabel('Number of Loans')
     plt.xticks(rotation=0)
     plt.tight_layout()
-    plt.grid(axis='y')
+    plt.grid(axis='x')
     st.pyplot(fig)
 
 id_loaner['ID_Count'] = id_loaner[['ID_Availability', 'Tax_ID_Availability',
