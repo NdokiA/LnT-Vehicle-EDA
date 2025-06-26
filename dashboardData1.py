@@ -9,8 +9,6 @@ plt.rcParams['font.family'] = 'DejaVu Sans Mono'
 
 train_df = pd.read_csv('dataset/processed.csv')
 #Load dictionaries
-with open('dataset/CNS_label.pkl', 'rb') as f:
-    CNS_label = pickle.load(f)
 with open('dataset/emp_label.pkl', 'rb') as f:
     emp_label = pickle.load(f)
 
