@@ -225,30 +225,27 @@ def id_count_bar():
     st.pyplot(fig)
 
 def categorize_credit_score(n):
-    try:
-        n = float(n)
-        if n <= 3:
-            return "Very-Low\nRisk"
-        elif 3 < n <= 6:
-            return "Low Risk"
-        elif 6 < n <= 8:
-            return "Medium Risk"
-        elif 8 < n <= 10:
-            return "High Risk"
-        elif 10 < n <= 12:
-            return "Very-High\nRisk"
-        elif n == 13:
-            return "No Bureau\nHistory"
-        else:
-            return "Unscored"
-    except:
+    n = float(n)
+    if n <= 3:
+        return "Very-Low\nRisk"
+    elif 3 < n <= 6:
+        return "Low Risk"
+    elif 6 < n <= 8:
+        return "Medium Risk"
+    elif 8 < n <= 10:
+        return "High Risk"
+    elif 10 < n <= 12:
+        return "Very-High\nRisk"
+    elif n == 13:
+        return "No Bureau\nHistory"
+    else:
         return "Unscored"
         
 def creditscore_bar():
   
     fig = plt.figure(figsize = (10,4))
-    train_df['CREDIT_SCORE_CATEGORY'] = train_df['CREDIT_SCORE_CATEGORY'].apply(categorize_credit_score)
-    loan_cre =   train_df.groupby('CREDIT_SCORE_CATEGORY').agg(
+    train_df['CREDIT_SCORE_CATEGORYC'] = train_df['CREDIT_SCORE_CATEGORY'].apply(categorize_credit_score)
+    loan_cre =   train_df.groupby('CREDIT_SCORE_CATEGORYC').agg(
         total_loans=('loan_default', 'count'),
         defaulted_loans = ('loan_default', 'sum'),
     ).sort_values(by = 'defaulted_loans', ascending = False).reset_index()
@@ -273,7 +270,7 @@ def creditscore_bar():
                 ha='center', va='bottom', fontsize=fontsize, color='black')
         
         plt.title('Total Loans for Each Credit Score Category')
-        plt.xticks(ticks = loan_cre.index, labels = loan_cre['CREDIT_SCORE_CATEGORY'], rotation=45)
+        plt.xticks(ticks = loan_cre.index, labels = loan_cre['CREDIT_SCORE_CATEGORYC'], rotation=45)
         plt.ylim([0, max(loan_cre['total_loans']) * 1.2])
         plt.ylabel('Number of Loans')
         plt.xlabel("")
